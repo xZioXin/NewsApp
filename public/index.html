@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+<html lang="uk">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Новинний додаток</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <link rel="icon" href="data:,">
+        <link rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="styles.css" />
+
+    </head>
+    <body class="bg-gray-100 font-sans">
+        <div
+            class="lg:hidden bg-blue-600 text-white p-4 flex justify-between items-center">
+            <h1 class="text-xl font-bold">Новинний додаток</h1>
+            <button id="mobileMenuButton" class="text-white focus:outline-none">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+
+        <div id="mobileMenu"
+            class="mobile-menu fixed inset-y-0 left-0 w-64 bg-gray-800 text-white z-50 lg:hidden">
+            <div
+                class="p-4 flex justify-between items-center border-b border-gray-700">
+                <h2 class="text-xl font-bold">Меню</h2>
+                <button id="closeMobileMenu"
+                    class="text-white focus:outline-none">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li><a href="#"
+                            class="block py-2 px-4 rounded hover:bg-blue-700 mobile-menu-item"
+                            onclick="showSection('home')"><i
+                                class="fas fa-home mr-2"></i>Головна</a></li>
+                    <li><a href="#"
+                            class="block py-2 px-4 rounded hover:bg-blue-700 mobile-menu-item"
+                            onclick="handleCreateNewsClick()"><i
+                                class="fas fa-plus mr-2"></i>Створити
+                            новину</a></li>
+                    <li><a href="#"
+                            class="block py-2 px-4 rounded hover:bg-blue-700 mobile-menu-item hidden"
+                            data-action="my-news"
+                            onclick="showSection('my-news')"><i
+                                class="fas fa-newspaper mr-2"></i>Мої
+                            новини</a></li>
+                    <li><a href="#"
+                            class="block py-2 px-4 rounded hover:bg-blue-700 mobile-menu-item"
+                            onclick="showSection('about')"><i
+                                class="fas fa-info-circle mr-2"></i>Про
+                            додаток</a></li>
+                    <li><a href="#"
+                            class="block py-2 px-4 rounded hover:bg-blue-700 mobile-menu-item hidden"
+                            data-action="profile"
+                            onclick="showSection('profile')"><i
+                                class="fas fa-user mr-2"></i>Мій
+                            профіль</a></li>
+                    <li><a href="#"
+                            class="block py-2 px-4 rounded hover:bg-blue-700 mobile-menu-item"
+                            data-action="login"
+                            onclick="showAuthForm('login')"><i
+                                class="fas fa-sign-in-alt mr-2"></i>Увійти</a></li>
+                    <li><a href="#"
+                            class="block py-2 px-4 rounded hover:bg-blue-700 mobile-menu-item"
+                            data-action="register"
+                            onclick="showAuthForm('register')"><i
+                                class="fas fa-user-plus mr-2"></i>Реєстрація</a></li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="flex min-h-screen">
+            <div class="sidebar hidden lg:block w-64 bg-gray-800 text-white">
+                <div class="p-4 border-b border-gray-700">
+                    <h1 class="text-xl font-bold">Новинний додаток</h1>
+                </div>
+                <nav class="p-4">
+                    <ul class="space-y-2">
+                        <li><a href="#"
+                                class="block py-2 px-4 rounded hover:bg-blue-700 desktop-menu-item"
+                                onclick="showSection('home')"><i
+                                    class="fas fa-home mr-2"></i>Головна</a></li>
+                        <li><a href="#"
+                                class="block py-2 px-4 rounded hover:bg-blue-700 desktop-menu-item"
+                                onclick="handleCreateNewsClick()"><i
+                                    class="fas fa-plus mr-2"></i>Створити
+                                новину</a></li>
+                        <li><a href="#"
+                                class="block py-2 px-4 rounded hover:bg-blue-700 desktop-menu-item hidden"
+                                data-action="my-news"
+                                onclick="showSection('my-news')"><i
+                                    class="fas fa-newspaper mr-2"></i>Мої
+                                новини</a></li>
+                        <li><a href="#"
+                                class="block py-2 px-4 rounded hover:bg-blue-700 desktop-menu-item"
+                                onclick="showSection('about')"><i
+                                    class="fas fa-info-circle mr-2"></i>Про
+                                додаток</a></li>
+                        <li><a href="#"
+                                class="block py-2 px-4 rounded hover:bg-blue-700 desktop-menu-item hidden"
+                                data-action="profile"
+                                onclick="showSection('profile')"><i
+                                    class="fas fa-user mr-2"></i>Мій
+                                профіль</a></li>
+                        <li><a href="#"
+                                class="block py-2 px-4 rounded hover:bg-blue-700 desktop-menu-item"
+                                data-action="login"
+                                onclick="showAuthForm('login')"><i
+                                    class="fas fa-sign-in-alt mr-2"></i>Увійти</a></li>
+                        <li><a href="#"
+                                class="block py-2 px-4 rounded hover:bg-blue-700 desktop-menu-item"
+                                data-action="register"
+                                onclick="showAuthForm('register')"><i
+                                    class="fas fa-user-plus mr-2"></i>Реєстрація</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+            <div class="flex-1 p-6">
+                <div id="auth-forms"
+                    class="hidden max-w-md mx-auto bg-white p-8 rounded-lg shadow-md">
+                    <div id="login-form" class="hidden">
+                        <h2 class="text-2xl font-bold mb-6 text-center">Увійти в
+                            систему</h2>
+                        <form id="loginForm" class="space-y-4">
+                            <div>
+                                <label for="login-email"
+                                    class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="login-email"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="login-password"
+                                    class="block text-sm font-medium text-gray-700">Пароль</label>
+                                <input type="password" id="login-password"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                            </div>
+                            <div class="flex justify-between">
+                                <button type="button"
+                                    onclick="showAuthForm('register')"
+                                    class="text-blue-600 hover:text-blue-800 text-sm">Немає
+                                    акаунту? Зареєструватись</button>
+                                <button type="submit"
+                                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Увійти</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="register-form" class="hidden">
+                        <h2
+                            class="text-2xl font-bold mb-6 text-center">Реєстрація</h2>
+                        <form id="registerForm" class="space-y-4">
+                            <div>
+                                <label for="register-name"
+                                    class="block text-sm font-medium text-gray-700">Ім'я</label>
+                                <input type="text" id="register-name"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="register-email"
+                                    class="block text-sm font-medium text-gray-700">Email</label>
+                                <input type="email" id="register-email"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="register-password"
+                                    class="block text-sm font-medium text-gray-700">Пароль</label>
+                                <input type="password" id="register-password"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="register-confirm-password"
+                                    class="block text-sm font-medium text-gray-700">Повторіть
+                                    пароль</label>
+                                <input type="password"
+                                    id="register-confirm-password"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                            </div>
+                            <div class="flex justify-between">
+                                <button type="button"
+                                    onclick="showAuthForm('login')"
+                                    class="text-blue-600 hover:text-blue-800 text-sm">Вже
+                                    маєте акаунт? Увійти</button>
+                                <button type="submit"
+                                    class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Зареєструватись</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <div id="app-sections">
+                    <div id="home-section" class="hidden">
+                        <div class="flex justify-between items-center mb-6">
+                            <h2 class="text-2xl font-bold">Останні новини</h2>
+                            <div class="flex space-x-2">
+                                <select id="category-filter"
+                                    class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="all">Всі категорії</option>
+                                    <option value="politics">Політика</option>
+                                    <option value="sports">Спорт</option>
+                                    <option
+                                        value="technology">Технології</option>
+                                    <option
+                                        value="entertainment">Розваги</option>
+                                </select>
+                                <select id="sort-news"
+                                    class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    <option value="newest">Спочатку
+                                        нові</option>
+                                    <option value="oldest">Спочатку
+                                        старі</option>
+                                    <option value="title-asc">За назвою
+                                        (А-Я)</option>
+                                    <option value="title-desc">За назвою
+                                        (Я-А)</option>
+                                </select>
+                                <input type="text" id="search-news"
+                                    placeholder="Пошук..."
+                                    class="px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                <button onclick="clearFilters(); loadNews();"
+                                    class="px-3 py-2 bg-gray-200 text-gray-700 rounded-md hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                                    <i class="fas fa-times mr-1"></i> Скинути
+                                </button>
+                            </div>
+                        </div>
+
+                        <div id="news-list"
+                            class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                        </div>
+                    </div>
+
+                    <div id="create-news-section"
+                        class="hidden max-w-3xl mx-auto">
+                        <h2 class="text-2xl font-bold mb-6">Створити новину</h2>
+                        <form id="create-news-form" class="space-y-4">
+                            <div>
+                                <label for="news-title"
+                                    class="block text-sm font-medium text-gray-700">Заголовок</label>
+                                <input type="text" id="news-title"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                            </div>
+                            <div>
+                                <label for="news-content"
+                                    class="block text-sm font-medium text-gray-700">Текст
+                                    новини</label>
+                                <textarea id="news-content" rows="6"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required></textarea>
+                            </div>
+                            <div>
+                                <label for="news-category"
+                                    class="block text-sm font-medium text-gray-700">Категорія</label>
+                                <select id="news-category"
+                                    class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                    required>
+                                    <option value>Оберіть категорію</option>
+                                    <option value="politics">Політика</option>
+                                    <option value="sports">Спорт</option>
+                                    <option
+                                        value="technology">Технології</option>
+                                    <option
+                                        value="entertainment">Розваги</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="news-media"
+                                    class="block text-sm font-medium text-gray-700">Медіа
+                                    (зображення або відео)</label>
+                                <input type="file" id="news-media"
+                                    class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                            </div>
+                            <div class="flex justify-end space-x-3">
+                                <button type="button"
+                                    onclick="showSection('home')"
+                                    class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Назад</button>
+                                <button type="button" id="preview-news"
+                                    class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Попередній
+                                    перегляд</button>
+                                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
+									Зберегти
+								</button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div id="news-preview-modal"
+                        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div
+                            class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                            <div class="p-6">
+                                <div
+                                    class="flex justify-between items-start mb-4">
+                                    <h3 id="preview-title"
+                                        class="text-2xl font-bold"></h3>
+                                    <button onclick="closePreview()"
+                                        class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="mb-4">
+                                    <span id="preview-category"
+                                        class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"></span>
+                                    <span id="preview-date"
+                                        class="ml-2 text-sm text-gray-500"></span>
+                                </div>
+                                <div id="preview-media-container"
+                                    class="mb-4"></div>
+                                <div id="preview-content"
+                                    class="prose max-w-none"></div>
+                                <div class="mt-6 pt-4 border-t border-gray-200">
+                                    <button onclick="closePreview()"
+                                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Закрити</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="edit-news-modal"
+                        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div
+                            class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto p-6">
+                            <div class="flex justify-between items-center mb-4">
+                                <h3 class="text-2xl font-bold">Редагувати
+                                    новину</h3>
+                                <button onclick="closeEditModal()"
+                                    class="text-gray-500 hover:text-gray-700">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <form id="edit-news-form" class="space-y-4">
+                                <div>
+                                    <label for="edit-news-title"
+                                        class="block text-sm font-medium text-gray-700">Заголовок</label>
+                                    <input type="text" id="edit-news-title"
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        required>
+                                </div>
+                                <div>
+                                    <label for="edit-news-content"
+                                        class="block text-sm font-medium text-gray-700">Текст
+                                        новини</label>
+                                    <textarea id="edit-news-content" rows="6"
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        required></textarea>
+                                </div>
+                                <div>
+                                    <label for="edit-news-category"
+                                        class="block text-sm font-medium text-gray-700">Категорія</label>
+                                    <select id="edit-news-category"
+                                        class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+                                        required>
+                                        <option value>Оберіть категорію</option>
+                                        <option
+                                            value="politics">Політика</option>
+                                        <option value="sports">Спорт</option>
+                                        <option
+                                            value="technology">Технології</option>
+                                        <option
+                                            value="entertainment">Розваги</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label for="edit-news-media"
+                                        class="block text-sm font-medium text-gray-700">Медіа
+                                        (зображення або відео)</label>
+                                    <input type="file" id="edit-news-media"
+                                        class="mt-1 block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100">
+                                    <div id="current-media-container"
+                                        class="mt-2"></div>
+                                </div>
+                                <div class="flex justify-end space-x-3">
+                                    <button type="button"
+                                        onclick="closeEditModal()"
+                                        class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">Скасувати</button>
+                                    <button type="button" id="preview-edit-news"
+                                        class="px-4 py-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Попередній
+                                        перегляд</button>
+                                    <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed">
+										Зберегти зміни
+									</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+                    <div id="edit-news-preview-modal"
+                        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div
+                            class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                            <div class="p-6">
+                                <div
+                                    class="flex justify-between items-start mb-4">
+                                    <h3 id="edit-preview-title"
+                                        class="text-2xl font-bold"></h3>
+                                    <button onclick="closeEditPreview()"
+                                        class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="mb-4">
+                                    <span id="edit-preview-category"
+                                        class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"></span>
+                                    <span id="edit-preview-date"
+                                        class="ml-2 text-sm text-gray-500"></span>
+                                </div>
+                                <div id="edit-preview-media-container"
+                                    class="mb-4"></div>
+                                <div id="edit-preview-content"
+                                    class="prose max-w-none"></div>
+                                <div class="mt-6 pt-4 border-t border-gray-200">
+                                    <button onclick="closeEditPreview()"
+                                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Закрити</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="my-news-section" class="hidden">
+                        <h2 class="text-2xl font-bold mb-6">Мої новини</h2>
+                        <div class="overflow-x-auto">
+                            <table class="min-w-full divide-y divide-gray-200">
+                                <thead class="bg-gray-50">
+                                    <tr>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Заголовок</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Категорія</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Статус</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Дата</th>
+                                        <th scope="col"
+                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Дії</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="my-news-list"
+                                    class="bg-white divide-y divide-gray-200">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div id="news-view-modal"
+                        class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+                        <div
+                            class="bg-white rounded-lg max-w-3xl w-full max-h-[90vh] overflow-y-auto">
+                            <div class="p-6">
+                                <div
+                                    class="flex justify-between items-start mb-4">
+                                    <h3 id="view-news-title"
+                                        class="text-2xl font-bold"></h3>
+                                    <button onclick="closeViewModal()"
+                                        class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <div class="mb-4">
+                                    <span id="view-news-category"
+                                        class="inline-block px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800"></span>
+                                    <span id="view-news-status"
+                                        class="ml-2 px-2 py-1 text-xs font-semibold rounded-full"></span>
+                                    <span id="view-news-date"
+                                        class="ml-2 text-sm text-gray-500"></span>
+                                </div>
+                                <div id="view-news-media-container"
+                                    class="mb-4"></div>
+                                <div id="view-news-content"
+                                    class="prose max-w-none mb-6"></div>
+                                <div class="pt-4 border-t border-gray-200">
+                                    <button onclick="closeViewModal()"
+                                        class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Закрити</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="about-section" class="hidden max-w-3xl mx-auto">
+                        <h2 class="text-2xl font-bold mb-6">Про додаток</h2>
+                        <div class="prose max-w-none">
+                            <p>Новинний додаток - це веб-застосунок для
+                                публікації та обговорення новин. Додаток
+                                дозволяє користувачам:</p>
+                            <ul class="list-disc pl-5">
+                                <li>Переглядати останні новини</li>
+                                <li>Створювати власні новини</li>
+                                <li>Коментувати новини інших користувачів</li>
+                                <li>Редагувати свої новини</li>
+                            </ul>
+                            <p class="mt-4">Для адміністраторів доступні
+                                додаткові функції:</p>
+                            <ul class="list-disc pl-5">
+                                <li>Модерація новин</li>
+                                <li>Видалення неправильного контенту</li>
+                            </ul>
+                            <div class="mt-8 border-t pt-6">
+                                <h3 class="text-lg font-semibold">Інструкція
+                                    користування:</h3>
+                                <ol class="list-decimal pl-5 space-y-2">
+                                    <li>Зареєструйтеся або увійдіть у
+                                        систему</li>
+                                    <li>На головній сторінці переглядайте
+                                        новини</li>
+                                    <li>Для створення новини натисніть
+                                        "Створити новину"</li>
+                                    <li>Заповніть форму та збережіть новину</li>
+                                    <li>У розділі "Мої новини" ви можете
+                                        керувати своїми публікаціями</li>
+                                </ol>
+                            </div>
+                            <div class="mt-8 border-t pt-6">
+                                <h3 class="text-lg font-semibold">Розробник
+                                    ZioXin</h3>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="profile-section" class="hidden max-w-3xl mx-auto">
+                        <h2 class="text-2xl font-bold mb-6">Мій профіль</h2>
+                        <div class="bg-white shadow rounded-lg p-6">
+                            <div class="flex items-center space-x-4 mb-6">
+                                <div
+                                    class="w-20 h-20 rounded-full bg-blue-100 flex items-center justify-center text-blue-600 text-3xl font-bold">
+                                    <span id="profile-initials">U</span>
+                                </div>
+                                <div>
+                                    <h3 id="profile-name"
+                                        class="text-xl font-semibold">Користувач</h3>
+                                    <p id="profile-email"
+                                        class="text-gray-600">user@example.com</p>
+                                    <span id="profile-role"
+                                        class="inline-block mt-1 px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">Користувач</span>
+                                </div>
+                            </div>
+
+                            <div class="border-t pt-4">
+                                <h4 class="font-semibold mb-3">Змінити дані
+                                    профілю</h4>
+                                <form id="profile-form" class="space-y-4">
+                                    <div>
+                                        <label for="profile-new-name"
+                                            class="block text-sm font-medium text-gray-700">Ім'я</label>
+                                        <input type="text" id="profile-new-name"
+                                            class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                    </div>
+
+                                    <div class="border-t pt-4">
+                                        <h5 class="font-medium mb-3">Змінити
+                                            пароль</h5>
+
+                                        <div class="mb-4">
+                                            <label
+                                                for="profile-current-password"
+                                                class="block text-sm font-medium text-gray-700">Поточний
+                                                пароль</label>
+                                            <input type="password"
+                                                id="profile-current-password"
+                                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                        </div>
+
+                                        <div class="mb-4">
+                                            <label for="profile-new-password"
+                                                class="block text-sm font-medium text-gray-700">Новий
+                                                пароль</label>
+                                            <input type="password"
+                                                id="profile-new-password"
+                                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                        </div>
+
+                                        <div>
+                                            <label
+                                                for="profile-confirm-password"
+                                                class="block text-sm font-medium text-gray-700">Підтвердіть
+                                                новий пароль</label>
+                                            <input type="password"
+                                                id="profile-confirm-password"
+                                                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500">
+                                        </div>
+                                    </div>
+
+                                    <div class="flex justify-end space-x-3">
+                                        <button type="button" onclick="logout()"
+                                            class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">Вийти</button>
+                                        <button type="submit"
+                                            class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">Зберегти
+                                            зміни</button>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div id="admin-panel"
+                                class="hidden mt-8 border-t pt-6">
+                                <h4 class="font-semibold mb-3">Панель
+                                    адміністратора</h4>
+                                <div class="space-y-4">
+                                    <div>
+                                        <h5 class="font-medium mb-2">Новини на
+                                            перевірку</h5>
+                                        <div class="overflow-x-auto">
+                                            <table
+                                                class="min-w-full divide-y divide-gray-200">
+                                                <thead class="bg-gray-50">
+                                                    <tr>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Заголовок</th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Автор</th>
+                                                        <th scope="col"
+                                                            class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Дії</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="pending-news-list"
+                                                    class="bg-white divide-y divide-gray-200">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <h5
+                                            class="font-medium mb-2">Статистика</h5>
+                                        <div
+                                            class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                            <div
+                                                class="bg-blue-50 p-4 rounded-lg">
+                                                <p
+                                                    class="text-sm text-blue-600">Користувачів</p>
+                                                <p id="users-count"
+                                                    class="text-2xl font-bold">0</p>
+                                            </div>
+                                            <div
+                                                class="bg-green-50 p-4 rounded-lg">
+                                                <p
+                                                    class="text-sm text-green-600">Опублікованих
+                                                    новин</p>
+                                                <p id="news-count"
+                                                    class="text-2xl font-bold">0</p>
+                                            </div>
+                                            <div
+                                                class="bg-purple-50 p-4 rounded-lg">
+                                                <p
+                                                    class="text-sm text-purple-600">Коментарів</p>
+                                                <p id="comments-count"
+                                                    class="text-2xl font-bold">0</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="delete-confirm-modal"
+            class="hidden fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
+            <div class="bg-white rounded-lg max-w-md w-full p-6">
+                <h3 class="text-xl font-bold mb-4">Підтвердження видалення</h3>
+                <p class="mb-6">Ви впевнені, що хочете видалити цей елемент? Цю
+                    дію неможливо скасувати.</p>
+                <div class="flex justify-end space-x-3">
+                    <button onclick="hideDeleteModal()"
+                        class="px-4 py-2 bg-gray-300 text-gray-700 rounded-md hover:bg-gray-400 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2">
+                        Скасувати
+                    </button>
+                    <button id="confirm-delete-btn"
+                        class="px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                        Видалити
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script src="script_index.js"></script>
+    </body>
+</html>

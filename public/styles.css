@@ -1,0 +1,286 @@
+.sidebar {
+    transition: all 0.3s ease;
+}
+
+.mobile-menu {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+}
+
+.mobile-menu.open {
+    transform: translateX(0);
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.status-draft {
+    background-color: #F59E0B;
+}
+
+.status-published {
+    background-color: #10B981;
+}
+
+.status-rejected {
+    background-color: #EF4444;
+}
+
+.status-pending {
+    background-color: #3B82F6;
+}
+
+.transition-opacity {
+    transition-property: opacity;
+}
+
+.duration-300 {
+    transition-duration: 300ms;
+}
+
+.toast-message {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.375rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    color: white;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 320px;
+    animation: slideIn 0.3s ease-out forwards;
+}
+
+.toast-success {
+    background-color: #10B981;
+}
+
+.toast-error {
+    background-color: #EF4444;
+}
+
+.toast-warning {
+    background-color: #F59E0B;
+}
+
+.toast-info {
+    background-color: #3B82F6;
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateX(100%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+.toast-fade-out {
+    animation: fadeOut 0.3s ease-out forwards;
+}
+
+@keyframes fadeOut {
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.desktop-menu-item,
+.mobile-menu-item {
+    transition: opacity 0.3s ease;
+}
+
+#delete-confirm-modal {
+    transition: opacity 0.3s ease;
+}
+
+#delete-confirm-modal.hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+#delete-confirm-modal:not(.hidden) {
+    opacity: 1;
+}
+
+.status-published {
+    background-color: #D1FAE5;
+    color: #065F46;
+}
+
+.status-pending {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.status-rejected {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
+
+.status-draft {
+    background-color: #E0E7FF;
+    color: #4338CA;
+}
+
+.news-card img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.status-published {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.status-pending {
+    background-color: #fef3c7;
+    color: #92400e;
+}
+
+.status-rejected {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.status-draft {
+    background-color: #e0e7ff;
+    color: #4338ca;
+}
+
+/* Стилі з news.html */
+.toast-message {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 12px 16px;
+    border-radius: 4px;
+    color: white;
+    display: flex;
+    align-items: center;
+    z-index: 1000;
+    animation: toast-fade-in 0.3s ease-out;
+    max-width: 350px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.toast-success {
+    background-color: #10B981;
+}
+
+.toast-error {
+    background-color: #EF4444;
+}
+
+.toast-warning {
+    background-color: #F59E0B;
+}
+
+.toast-info {
+    background-color: #3B82F6;
+}
+
+.toast-fade-out {
+    animation: toast-fade-out 0.3s ease-in;
+}
+
+@keyframes toast-fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes toast-fade-out {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+.status-published {
+    background-color: #10B981;
+    color: white;
+}
+
+.status-pending {
+    background-color: #F59E0B;
+    color: white;
+}
+
+.status-rejected {
+    background-color: #EF4444;
+    color: white;
+}
+
+.status-draft {
+    background-color: #6B7280;
+    color: white;
+}
+
+video {
+    max-width: 100%;
+    height: auto;
+    background-color: #000;
+}
+
+.media-container {
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow: hidden;
+}
+
+.media-container video,
+.media-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.fa-spin {
+    animation: spin 1s linear infinite;
+}
+
+button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.toast-error {
+    background-color: #fef2f2;
+    border-left: 4px solid #dc2626;
+    color: #b91c1c;
+}
+
+.toast-error .fa-exclamation-circle {
+    color: #dc2626;
+}
